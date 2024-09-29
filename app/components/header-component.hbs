@@ -5,14 +5,22 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        {{#if this.user.isLoggedIn}}
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                  <LinkTo class="nav-link" activeClass="nav-link active" @route="events">Events</LinkTo>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" activeClass="nav-link active" {{on "click" this.logout}}>Logout</a>
+              </li>
+          </ul>
+        {{else}}
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-                <LinkTo class="nav-link" activeClass="nav-link active" @route="events">Events</LinkTo>
+              <LinkTo class="nav-link" activeClass="nav-link active" @route="login">Login</LinkTo>
             </li>
-            <li class="nav-item">
-                <LinkTo class="nav-link" activeClass="nav-link active" @route="login">Login</LinkTo>
-            </li>
-        </ul>
+          </ul>
+        {{/if}}
     </div>
   </div>
 </nav>
