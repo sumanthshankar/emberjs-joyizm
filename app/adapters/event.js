@@ -19,7 +19,7 @@ export default class EventAdapter extends RESTAdapter {
     };
 
     const headers = {
-      'Content-type': 'application/json'
+      'Content-type': 'application/json',
     };
 
     let body = JSON.stringify(eventPost);
@@ -30,7 +30,7 @@ export default class EventAdapter extends RESTAdapter {
       body,
     };
 
-    return await fetch(url, options).then(response => response.json());
+    return await fetch(url, options).then((response) => response.json());
   }
 
   async findRecord(store, type, id, snapshot) {
@@ -48,7 +48,7 @@ export default class EventAdapter extends RESTAdapter {
     };
 
     const headers = {
-      'Content-type': 'application/json'
+      'Content-type': 'application/json',
     };
 
     let body = JSON.stringify(eventPost);
@@ -59,7 +59,7 @@ export default class EventAdapter extends RESTAdapter {
       body,
     };
 
-    return await fetch(url, options).then(response => response.json());
+    return await fetch(url, options).then((response) => response.json());
   }
 
   handleResponse(status, headers, payload, requestData) {
