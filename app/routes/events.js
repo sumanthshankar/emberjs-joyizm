@@ -1,3 +1,10 @@
 import Route from '@ember/routing/route';
+import { service } from '@ember/service';
 
-export default class EventsRoute extends Route {}
+export default class EventsRoute extends Route {
+    @service store;
+
+    model() {
+        return this.store.findAll('event');
+    }
+}

@@ -1,2 +1,9 @@
 {{page-title "Events"}}
-{{outlet}}
+<div class="container">
+    <h1>Events page</h1>
+    <div>
+        {{#each @model as |event|}}
+            <Event @eventId="{{event.id}}" @imageURL="{{event.imageUrl}}" @name="{{event.name}}" @category="{{event.category}}" />
+        {{/each}}
+    </div>
+</div>

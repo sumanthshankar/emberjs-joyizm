@@ -10,6 +10,6 @@ Router.map(function () {
   this.route('index', { path: '/' });
   this.route('login');
   this.route('events', function () {
-    this.route('event');
+    this.route('event', { path: '/:eventId' });
   });
 });

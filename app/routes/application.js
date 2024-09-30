@@ -1,12 +1,12 @@
-import Route from '@ember/routing/route'; 
+import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 
 export default class ApplicationRoute extends Route {
-    @service user;
+  @service user;
 
-    beforeModel() {
-        if(localStorage.getItem('Token') != null) {
-            this.user.isLoggedIn = true;
-        }
+  beforeModel() {
+    if (localStorage.getItem('Token') != null) {
+      this.user.isLoggedIn = true;
     }
+  }
 }

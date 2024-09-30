@@ -3,11 +3,11 @@ import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 
 export default class HeaderComponent extends Component {
-    @service user;
+  @service user;
 
-    @action
-    logout() {
-        localStorage.clear();
-        this.user.isLoggedIn = false;
-    }
+  @action
+  logout() {
+    localStorage.clear();
+    this.user.isLoggedIn = false;
+  }
 }
