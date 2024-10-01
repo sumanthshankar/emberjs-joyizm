@@ -25,11 +25,15 @@ export default class LoginController extends Controller {
       audience: 'MobileApp',
     };
 
-    const response = await this.user.login(userData);
-
-    this.user.isLoggedIn = true;
-    const token = response['token'];
-    localStorage.setItem('Token', token);
-    this.router.transitionTo('/');
+    try {
+      this.user.show();
+      const response = await this.user.login(userData);
+      this.user.isLoggedIn = true;
+      const token = response['token'];
+      localStorage.setItem('Token', token);
+      this.router.transitionTo('/');
+    } finally {
+      this.user.hide();
+    }
   }
 }

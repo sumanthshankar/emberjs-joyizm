@@ -11,7 +11,7 @@ export default class EventSerializer extends RESTSerializer {
   };
 
   normalizeResponse(store, primaryModelClass, payload, id, requestType) {
-    //console.log(payload);
+    //console.log('normalizeResponse');
     if (payload && !Array.isArray(payload['activities'])) {
       const event = {
         ssId: payload.ssId,
@@ -33,6 +33,7 @@ export default class EventSerializer extends RESTSerializer {
   }
 
   normalizeArrayResponse(store, primaryModelClass, payload, id, requestType) {
+    //console.log('normalizeArrayResponse');
     //console.log(payload['activities']);
     payload = { events: payload['activities'] };
     return super.normalizeArrayResponse(

@@ -6,6 +6,16 @@ export default class UserService extends Service {
 
   @tracked isLoggedIn = false;
 
+  @tracked isLoading = false;
+
+  show() {
+    this.isLoading = true;
+  }
+
+  hide() {
+    this.isLoading = false;
+  }
+
   async login(user) {
     const url = `${this.host}/User/Login`;
     const headers = {

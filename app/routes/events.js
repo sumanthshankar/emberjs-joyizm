@@ -6,7 +6,7 @@ export default class EventsRoute extends Route {
   @service user;
   @service router;
 
-  beforeModel(transition) {
+  beforeModel() {
     if (!this.user.isLoggedIn) {
       this.router.transitionTo('/login');
     }
