@@ -11,15 +11,15 @@ export default class EventSerializer extends RESTSerializer {
   };
 
   normalizeResponse(store, primaryModelClass, payload, id, requestType) {
-    console.log('normalizeResponse');
-    if (payload && !Array.isArray(payload['activities'])) {
+    //console.log('normalizeResponse');
+    //console.log(payload.data);
+    if (payload && !Array.isArray(payload.data['activities'])) {
       const event = {
-        ssId: payload.ssId,
-        name: payload.ssName,
-        imageUrl: payload.ssResourceList[0].imageUrl[0],
-        category: payload.ssResourceList[0].ssResourceName,
+        ssId: payload.data.ssId,
+        name: payload.data.ssName,
+        imageUrl: payload.data.ssResourceList[0].imageUrl[0],
+        category: payload.data.ssResourceList[0].ssResourceName,
       };
-      //console.log(event);
       payload = { event };
     }
 
@@ -33,9 +33,10 @@ export default class EventSerializer extends RESTSerializer {
   }
 
   normalizeArrayResponse(store, primaryModelClass, payload, id, requestType) {
-    console.log('normalizeArrayResponse');
-    console.log(payload['activities']);
-    payload = { events: payload['activities'] };
+    //console.log('normalizeArrayResponse');
+    //console.log(payload.data['activities']);
+    //console.log('requestType: ' + payload);
+    payload = { events: payload.data['activities'] };
     return super.normalizeArrayResponse(
       store,
       primaryModelClass,

@@ -7,26 +7,33 @@ export default class EventAdapter extends RESTAdapter {
 
 
   async findEvents(store, type, eventRequest) {
-    const axios = require('axios');
-    console.log('findEvents');
-    
-    let url = `${this.host}/activity/activitysearch`;
+    //console.log('findEvents');
+    const url = `${this.host}/activity/activitysearch`;
     
     const headers = {
       'Content-type': 'application/json',
     };
-
-    const body = JSON.stringify(eventRequest);
+    
+    const data = JSON.stringify(eventRequest);
 
     return axios({
       method: 'POST',
-      url: url,
+      url,
       headers,
-      data: body,
+      data,
+    }).then((response) => {
+      //const s = JSON.stringify(response);
+      //console.log('response: ' + JSON.stringify(response));
+      // console.log('type.modelName: ' + type);
+      return store.serializerFor('event').normalizeArrayResponse(store, type, response, null, 'findEvents');
+    }).catch(error => {
+      console.error('Error fetching record:', error);
+      throw error;
     });
   }
 
   async findAll(store, type, sinceToken) {
+    //const axios = require('axios');
     let url = `${this.host}/activity/activitysearch`;
 
     let eventPost = {
@@ -35,8 +42,8 @@ export default class EventAdapter extends RESTAdapter {
       agentId: 1,
       appType: 'B2C',
       currencyCode: 'USD',
-      startDate: '2024-09-27',
-      endDate: '2024-10-07',
+      startDate: '2024-10-04',
+      endDate: '2024-11-04',
       country: 'United States',
       city: 'Fremont - California',
     };
@@ -45,15 +52,14 @@ export default class EventAdapter extends RESTAdapter {
       'Content-type': 'application/json',
     };
 
-    let body = JSON.stringify(eventPost);
+    const body = JSON.stringify(eventPost);
 
-    const options = {
+    return axios({
       method: 'POST',
+      url: url,
       headers,
-      body,
-    };
-
-    return await fetch(url, options).then((response) => response.json());
+      data: body,
+    });
   }
 
   async findRecord(store, type, id, snapshot) {
@@ -74,15 +80,14 @@ export default class EventAdapter extends RESTAdapter {
       'Content-type': 'application/json',
     };
 
-    let body = JSON.stringify(eventPost);
+    const body = JSON.stringify(eventPost);
 
-    const options = {
+    return axios({
       method: 'POST',
+      url: url,
       headers,
-      body,
-    };
-
-    return await fetch(url, options).then((response) => response.json());
+      data: body,
+    });
   }
 
   handleResponse(status, headers, payload, requestData) {

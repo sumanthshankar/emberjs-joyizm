@@ -26,7 +26,6 @@ export default class LoginController extends Controller {
     };
 
     try {
-      console.log();
       this.user.show();
       const response = await this.user.login(userData);
       this.user.isLoggedIn = true;
