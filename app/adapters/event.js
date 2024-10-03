@@ -1,7 +1,30 @@
 import RESTAdapter from '@ember-data/adapter/rest';
+import axios from 'axios';
+
 
 export default class EventAdapter extends RESTAdapter {
   host = 'https://tcwebapi-rezygenservices.azurewebsites.net';
+
+
+  async findEvents(store, type, eventRequest) {
+    const axios = require('axios');
+    console.log('findEvents');
+    
+    let url = `${this.host}/activity/activitysearch`;
+    
+    const headers = {
+      'Content-type': 'application/json',
+    };
+
+    const body = JSON.stringify(eventRequest);
+
+    return axios({
+      method: 'POST',
+      url: url,
+      headers,
+      data: body,
+    });
+  }
 
   async findAll(store, type, sinceToken) {
     let url = `${this.host}/activity/activitysearch`;
